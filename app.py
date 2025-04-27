@@ -16,9 +16,6 @@ if subs is None:
 if subUrlTemplate is None:
     raise ValueError("Environment variable 'SUB_URL_TEMPLATE' is not set, it should be like 'https://example.com/sub?token={token}'")
 
-with open('config.template.yml', 'r') as file:
-    config_template = yaml.safe_load(file.read())
-
 def generate_name(label, label_count):
     if label not in label_count:
         label_count[label] = 0
@@ -27,7 +24,8 @@ def generate_name(label, label_count):
 
 @app.route('/config.yml', methods=['GET'])
 def get_config():
-    config = config_template.copy()
+    with open('config.template.yml', 'r') as file:
+        config = yaml.safe_load(file.read())
     label_count = {}
     subs_list = subs.split(',')
     headers = { 'User-Agent': 'clash', 'Accept': 'application/yaml' }
@@ -52,7 +50,7 @@ def get_config():
         except requests.RequestException as e:
             print(f"Error fetching config from {sub}: {e}")
 
-    config['proxies'].extend(proxies)
+    config['proxies'] = proxies
     for proxy_group in config['proxy-groups']:
         proxy_group['proxies'].extend(map(lambda p: p['name'], proxies))
     config_yaml = yaml.dump(config, allow_unicode=True)
