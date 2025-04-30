@@ -105,6 +105,7 @@ rules:
     - RULE-SET,applications,DIRECT
     - DOMAIN,clash.razord.top,DIRECT
     - DOMAIN,yacd.haishan.me,DIRECT
+    - DOMAIN-SUFFIX,imgur.com,52pkm
     - RULE-SET,private,DIRECT
     - RULE-SET,reject,REJECT
     - RULE-SET,icloud,DIRECT
