@@ -100,6 +100,7 @@ rule-providers:
     interval: 86400
 rules:
     - DOMAIN-SUFFIX,575730.xyz,52pkm
+    - DOMAIN-SUFFIX,docker.com,52pkm
     - SRC-IP-CIDR,192.168.50.179/32,DIRECT
     - RULE-SET,applications,DIRECT
     - DOMAIN,clash.razord.top,DIRECT
