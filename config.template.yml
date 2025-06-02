@@ -105,8 +105,8 @@ rules:
     - DOMAIN-SUFFIX,imgur.com,52pkm
     - RULE-SET,private,DIRECT
     - RULE-SET,reject,REJECT
-    - RULE-SET,icloud,DIRECT
-    - RULE-SET,apple,DIRECT
+    - RULE-SET,icloud,52pkm
+    - RULE-SET,apple,52pkm
     - RULE-SET,google,52pkm
     - RULE-SET,proxy,52pkm
     - RULE-SET,direct,DIRECT
