@@ -7,6 +7,10 @@ WORKDIR /app
 # Copy requirements file
 COPY requirements.txt .
 
+RUN apt update
+
+RUN apt install curl -y
+
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
