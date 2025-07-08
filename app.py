@@ -58,7 +58,7 @@ def get_config():
 
 @app.route('/health', methods=['GET'])
 def health():
-    return Response('ok', status=200)
+    return Response('OK', status=200)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
