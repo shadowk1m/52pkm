@@ -56,5 +56,9 @@ def get_config():
     config_yaml = yaml.dump(config, allow_unicode=True)
     return Response(config_yaml, mimetype='text/yaml', status=200)
 
+@app.route('/health', method=['GET'])
+def health():
+    return Response('ok', status=200)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
