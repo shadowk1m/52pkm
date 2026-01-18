@@ -10,7 +10,7 @@ port = os.getenv('PORT', 8000)
 subs = os.getenv('SUBS')
 subUrlTemplate = os.getenv('SUB_URL_TEMPLATE')
 ignoreLabelKeywords = os.getenv('IGNORE_LABEL_KEYWORDS', '').split(',')
-ignoreProxies = os.getenv('IGNORE_PROXIES', '').split(',')
+ignoreProxyNames = os.getenv('IGNORE_PROXY_NAMES', '').split(',')
 
 if subs is None:
     raise ValueError("Environment variable 'SUBS' is not set")
@@ -44,11 +44,13 @@ def get_config():
             sub_config = yaml.safe_load(response.text)
             
             sub_proxies = sub_config.get('proxies', [])
+            if any(isinstance(p, dict) and p.get('name') in ignoreProxyNames for p in sub_proxies):
+                matched = [p.get('name') for p in sub_proxies if isinstance(p, dict) and p.get('name') in ignoreProxyNames]
+                print(f"Ignored subscription {sub} because it contains ignored proxy names: {matched}")
+                continue
+
             for idx, proxy in enumerate(sub_proxies):
                 if isinstance(proxy, dict) and 'name' in proxy:
-                    if any(ignore in proxy['name'] for ignore in ignoreProxies):
-                        print(f"Ignoring proxy '{proxy['name']}' with {sub} (matched ignoreProxies)")
-                        break
                     label = re.sub(r'\s*\d.+', '', proxy['name'])
                     if any(keyword in label for keyword in ignoreLabelKeywords):
                         continue
