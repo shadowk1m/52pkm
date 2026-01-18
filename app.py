@@ -46,7 +46,7 @@ def get_config():
             sub_proxies = sub_config.get('proxies', [])
             if any(isinstance(p, dict) and p.get('name') in ignoreProxyNames for p in sub_proxies):
                 matched = [p.get('name') for p in sub_proxies if isinstance(p, dict) and p.get('name') in ignoreProxyNames]
-                print(f"Ignored subscription {sub} because it contains ignored proxy names: {matched}")
+                app.logger.warning(f"Ignored subscription {sub} because it contains ignored proxy names: {matched}")
                 continue
 
             for idx, proxy in enumerate(sub_proxies):
