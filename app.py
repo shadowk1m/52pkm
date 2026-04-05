@@ -61,7 +61,7 @@ def get_config():
 
     label_count = {}
     subs_list = [s.strip() for s in subs.split(',') if s.strip()]
-    headers = {'User-Agent': 'clash', 'Accept': 'application/yaml'}
+    headers = {'User-Agent': 'clash.meta', 'Accept': 'application/yaml'}
     proxies = []
 
     # Prepare list of subscription URLs
